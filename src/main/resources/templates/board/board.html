@@ -1,0 +1,37 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+<canvas id="canvas" width="1200" height="700" style="background-color: antiquewhite"></canvas>
+
+<script>
+
+    var canvas = document.getElementById('canvas');
+    var ctx = canvas.getContext('2d');
+    var isDrawing;
+    ctx.globalAlpha = 0.2;
+
+
+    canvas.onmousedown = function(e) {
+        isDrawing = true;
+        ctx.beginPath();
+        ctx.moveTo(e.offsetX, e.offsetY);
+
+    };
+    canvas.onmousemove = function(e) {
+        if (isDrawing) {
+            ctx.lineTo(e.offsetX, e.offsetY);
+            ctx.stroke();
+        }
+    };
+    canvas.onmouseup = function() {
+        isDrawing = false;
+        ctx.closePath();
+        var data = canvas.toDataURL();
+        $.post("/save",{ canvas: data} );
+    };
+
+    function getContent(){
+        $.get("/");
+    }
+    setInterval(getContent, 2000);
+
+</script>
