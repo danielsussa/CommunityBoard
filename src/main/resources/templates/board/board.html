@@ -1,13 +1,20 @@
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+
+<tr th:each="canva : ${canvas}">
+    <td th:text="${canva.getData()}">olaa</td>
+    <!--<td th:text="(${order.ammount} * ${order.product.price}).formatDecima() "></td>-->
+</tr>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
 <canvas id="canvas" width="1200" height="700" style="background-color: antiquewhite"></canvas>
 
-<script>
+<script th:inline="javascript">
 
     var canvas = document.getElementById('canvas');
     var ctx = canvas.getContext('2d');
     var isDrawing;
-    ctx.globalAlpha = 0.2;
+    ctx.globalAlpha = 1;
 
 
     canvas.onmousedown = function(e) {
@@ -29,9 +36,42 @@
         $.post("/save",{ canvas: data} );
     };
 
+    function getCurrentCanvas() {
+        var canvasData = [[${canvas.data}]];
+        //console.log([[${canvas.data}]]);
+
+        if(canvasData){
+            var myCanvas = document.getElementById('canvas');
+            var ctx = myCanvas.getContext('2d');
+            var img = new Image;
+            img.onload = function(){
+                ctx.drawImage(img,0,0); // Or at whatever offset you like
+            };
+            img.src = canvasData;
+        }
+    }
+
+
+
+
     function getContent(){
-        $.get("/");
+        $.get("/getCanvas",function (canvasData) {
+            if(canvasData){
+                var myCanvas = document.getElementById('canvas');
+                var ctx = myCanvas.getContext('2d');
+                var img = new Image;
+                img.onload = function(){
+                    ctx.drawImage(img,0,0); // Or at whatever offset you like
+                };
+                img.src = canvasData;
+            }
+        });
     }
     setInterval(getContent, 2000);
 
+
+
+
 </script>
+
+</html>

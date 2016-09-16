@@ -5,6 +5,7 @@ package com.example.model;
  */
 public class Canvas {
     String data;
+    Long millis;
 
     public String getData() {
         return data;
@@ -12,5 +13,13 @@ public class Canvas {
 
     public void setData(String data) {
         this.data = data;
+    }
+
+    public Long getMillis() {
+        return millis;
+    }
+
+    public void setMillis(Long millis) {
+        this.millis = millis;
     }
 }
