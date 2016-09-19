@@ -27,7 +27,6 @@ public class BoardController {
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public @ResponseBody String saveDraw(@ModelAttribute("canvas") String data){
-        System.out.println(canvas);
         canvas.setData(data);
         canvas.setMillis(System.currentTimeMillis());
         return "board/board";
