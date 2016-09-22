@@ -43,4 +43,5 @@ function getContent(){
         }
     });
 }
+getContent();
 setInterval(getContent, 2000);
