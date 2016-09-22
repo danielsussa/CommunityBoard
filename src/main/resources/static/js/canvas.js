@@ -35,9 +35,6 @@ function getContent(){
         if(canvasData){
             var myCanvas = document.getElementById('canvas');
             var ctx = myCanvas.getContext('2d');
-            ctx.font = 'italic 16pt Calibri';
-            ctx.fillText('Lousa reativa. Desenhe e visualize em tempo real', 50, 50);
-            ctx.fillText('E lembre-se.. o conteúdo não pode ser apagado e é visto por todos! =)', 50, 70);
             var img = new Image;
             img.onload = function(){
                 ctx.drawImage(img,0,0); // Or at whatever offset you like
