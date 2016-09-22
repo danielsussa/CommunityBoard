@@ -11,3 +11,7 @@ body{
 canvas{
     background-color: #faeae2;
 }
+
+.title{
+    position: absolute;
+}
