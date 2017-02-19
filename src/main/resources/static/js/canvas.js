@@ -40,6 +40,10 @@ function getContent(){
                 ctx.drawImage(img,0,0); // Or at whatever offset you like
             };
             img.src = canvasData;
+        }else {
+            var myCanvas = document.getElementById('canvas');
+            var ctx = myCanvas.getContext('2d');
+            ctx.clearRect(0,0,2000,2000);
         }
     });
 }
